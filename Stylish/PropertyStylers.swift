@@ -241,7 +241,17 @@ public extension Stylish.PropertyStylers {
         public struct BackgroundColor: PropertyStyler {
             public static var propertyKey: String { return "backgroundColor" }
             public static func apply(value: UIColor?, to target: UIKit.UIView, using bundle: Bundle) {
-                target.backgroundColor = value
+                if let button = target as? UIKit.UIButton {
+                    if button.isEnabled {
+                        print("enabled button")
+                        target.backgroundColor = value
+                    } else {
+                        print("skipped button")
+                    }
+                } else {
+                    print("not button")
+                    target.backgroundColor = value
+                }
             }
         }
         
